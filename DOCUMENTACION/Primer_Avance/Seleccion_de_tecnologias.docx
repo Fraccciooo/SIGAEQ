@@ -1,0 +1,10 @@
+Selección de Tecnologías
+
+Componente	            <----->     Tecnología elegida
+Frontend	            <----->     React.js + Tailwind CSS
+Backend	                <----->     Node.js + Express.js
+Base de datos	        <----->     SQLite
+Autenticación	        <----->     JWT (JSON Web Tokens)
+Control de versiones	<----->     Git + GitHub
+Despliegue	            <----->     Render / AWS / Google Cloud
+Documentación	        <----->     Markdown + Swagger

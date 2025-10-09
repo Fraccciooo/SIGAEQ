@@ -1,0 +1,26 @@
+Listado Detallado de Funcionalidades del Sistema
+Módulo de Catálogo de Equipos:
+Registrar equipos con: ID, tipo, marca, modelo, serial, estado, ubicación, asignado a.
+
+Buscar, filtrar y editar equipos.
+
+Historial de movimientos.
+
+Módulo de Asignación:
+Solicitud de asignación/reasignación por formulario digital.
+
+Flujo de aprobación por jefes de departamento.
+
+Notificaciones por correo.
+
+Módulo de Reportes:
+Reporte de equipos asignados por usuario.
+
+Reporte de equipos disponibles/ocupados.
+
+Reporte histórico de movimientos.
+
+Módulo de Usuarios y Roles:
+Administradores, jefes de departamento, usuarios comunes.
+
+Permisos diferenciados.

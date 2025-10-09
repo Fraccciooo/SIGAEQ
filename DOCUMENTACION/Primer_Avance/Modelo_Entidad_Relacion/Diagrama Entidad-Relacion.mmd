@@ -1,0 +1,57 @@
+erDiagram
+    EMPLEADOS {
+        SERIAL id PK
+        VARCHAR cedula UK
+        VARCHAR nombre
+        VARCHAR apellido
+        VARCHAR cargo
+        DATE fecha_ingreso
+        VARCHAR departamento
+        VARCHAR correo UK
+        BOOLEAN activo
+        TIMESTAMP fecha_creacion
+        TIMESTAMP fecha_actualizacion
+    }
+
+    EQUIPOS {
+        SERIAL id PK
+        VARCHAR tipo
+        VARCHAR marca
+        VARCHAR modelo
+        VARCHAR numero_serial UK
+        VARCHAR estado
+        VARCHAR ubicacion
+        INTEGER empleado_id FK
+        DATE fecha_registro
+        TIMESTAMP fecha_creacion
+        TIMESTAMP fecha_actualizacion
+    }
+
+    HISTORIAL_ASIGNACIONES {
+        SERIAL id PK
+        INTEGER equipo_id FK
+        INTEGER empleado_id_anterior FK
+        INTEGER empleado_id_nuevo FK
+        INTEGER administrador_id FK
+        DATE fecha_cambio
+        TEXT observaciones
+        TIMESTAMP fecha_creacion
+    }
+
+    USUARIOS_SISTEMA {
+        SERIAL id PK
+        INTEGER empleado_id FK,UK
+        VARCHAR username UK
+        VARCHAR password_hash
+        VARCHAR rol
+        BOOLEAN activo
+        TIMESTAMP fecha_creacion
+        TIMESTAMP ultimo_login
+    }
+
+    EMPLEADOS ||--o{ EQUIPOS : "asigna"
+    EMPLEADOS ||--o{ HISTORIAL_ASIGNACIONES : "registra_como_anterior"
+    EMPLEADOS ||--o{ HISTORIAL_ASIGNACIONES : "registra_como_nuevo"
+    EMPLEADOS ||--o{ HISTORIAL_ASIGNACIONES : "administra"
+    EQUIPOS ||--o{ HISTORIAL_ASIGNACIONES : "tiene_historial"
+    EMPLEADOS ||--|| USUARIOS_SISTEMA : "tiene_acceso"
