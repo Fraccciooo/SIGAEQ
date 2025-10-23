@@ -104,37 +104,37 @@ const Empleados = () => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Encabezado */}
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-white mb-3">
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">
           Gestión de Empleados
         </h1>
-        <p className="text-blue-100 text-lg opacity-80">
+        <p className="text-gray-600">
           Administra los empleados de la fundación
         </p>
       </div>
 
       {error && (
-        <div className="glass-card p-4 border border-red-400/30 bg-red-500/20 rounded-2xl">
-          <p className="text-red-100 text-center">{error}</p>
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded text-sm">
+          {error}
         </div>
       )}
 
       {/* Tarjeta de acciones y estadísticas */}
-      <div className="glass-card p-6 rounded-2xl border border-white/20">
+      <div className="corporate-card p-6">
         <div className="flex flex-col lg:flex-row justify-between items-center mb-6">
-          <div className="text-center lg:text-left mb-4 lg:mb-0">
-            <h2 className="text-2xl font-bold text-white mb-2">
+          <div className="mb-4 lg:mb-0">
+            <h2 className="text-xl font-semibold text-gray-900 mb-2">
               Lista de Empleados
             </h2>
-            <p className="text-blue-100">
+            <p className="text-gray-600">
               {empleados.length} empleados registrados en el sistema
             </p>
           </div>
           <button
             onClick={openCreateModal}
-            className="bg-gradient-to-r from-green-500 to-teal-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:from-green-600 hover:to-teal-600 transition-all duration-300 hover-lift flex items-center"
+            className="corporate-btn-primary flex items-center"
           >
             <span className="text-lg mr-2">+</span>
             Nuevo Empleado
@@ -143,70 +143,66 @@ const Empleados = () => {
 
         {/* Lista de empleados */}
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="corporate-table">
             <thead>
-              <tr className="border-b border-white/20">
-                <th className="text-left py-4 px-4 text-white/60 font-semibold">Empleado</th>
-                <th className="text-left py-4 px-4 text-white/60 font-semibold">Cargo</th>
-                <th className="text-left py-4 px-4 text-white/60 font-semibold">Departamento</th>
-                <th className="text-left py-4 px-4 text-white/60 font-semibold">Fecha Ingreso</th>
-                <th className="text-left py-4 px-4 text-white/60 font-semibold">Estado</th>
-                <th className="text-left py-4 px-4 text-white/60 font-semibold">Acciones</th>
+              <tr>
+                <th>Empleado</th>
+                <th>Cargo</th>
+                <th>Departamento</th>
+                <th>Fecha Ingreso</th>
+                <th>Estado</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               {empleados.map((empleado) => (
-                <tr key={empleado.id} className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                  <td className="py-4 px-4">
+                <tr key={empleado.id}>
+                  <td>
                     <div className="flex items-center">
-                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mr-4">
-                        <span className="text-white font-semibold text-sm">
+                      <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                        <span className="text-blue-600 font-semibold text-sm">
                           {empleado.nombre?.charAt(0)}{empleado.apellido?.charAt(0)}
                         </span>
                       </div>
                       <div>
-                        <div className="text-white font-semibold">
+                        <div className="font-medium text-gray-900">
                           {empleado.nombre} {empleado.apellido}
                         </div>
-                        <div className="text-white/60 text-sm">
+                        <div className="text-gray-500 text-sm">
                           {empleado.cedula}
                         </div>
                       </div>
                     </div>
                   </td>
-                  <td className="py-4 px-4">
-                    <div className="text-white font-medium">{empleado.cargo}</div>
+                  <td>
+                    <div className="text-gray-900">{empleado.cargo}</div>
                   </td>
-                  <td className="py-4 px-4">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/20">
+                  <td>
+                    <span className="badge-info">
                       {empleado.departamento}
                     </span>
                   </td>
-                  <td className="py-4 px-4">
-                    <div className="text-white/70 text-sm">
+                  <td>
+                    <div className="text-gray-500 text-sm">
                       {new Date(empleado.fecha_ingreso).toLocaleDateString('es-ES')}
                     </div>
                   </td>
-                  <td className="py-4 px-4">
-                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
-                      empleado.activo 
-                        ? 'bg-green-500/20 text-green-300 border border-green-500/30' 
-                        : 'bg-red-500/20 text-red-300 border border-red-500/30'
-                    }`}>
+                  <td>
+                    <span className={empleado.activo ? 'badge-success' : 'badge-error'}>
                       {empleado.activo ? 'Activo' : 'Inactivo'}
                     </span>
                   </td>
-                  <td className="py-4 px-4">
+                  <td>
                     <div className="flex space-x-2">
                       <button
                         onClick={() => handleEdit(empleado)}
-                        className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-lg border border-blue-500/30 hover:bg-blue-500/30 transition-colors text-sm"
+                        className="text-blue-600 hover:text-blue-800 text-sm font-medium"
                       >
                         Editar
                       </button>
                       <button
                         onClick={() => handleDelete(empleado.id)}
-                        className="px-3 py-1 bg-red-500/20 text-red-300 rounded-lg border border-red-500/30 hover:bg-red-500/30 transition-colors text-sm"
+                        className="text-red-600 hover:text-red-800 text-sm font-medium"
                       >
                         Eliminar
                       </button>
@@ -219,11 +215,11 @@ const Empleados = () => {
 
           {empleados.length === 0 && !loading && (
             <div className="text-center py-12">
-              <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <span className="text-white/40 text-2xl">👥</span>
+              <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <span className="text-gray-400 text-2xl">👥</span>
               </div>
-              <p className="text-white/60 text-lg">No se encontraron empleados</p>
-              <p className="text-white/40 text-sm mt-2">Comienza agregando el primer empleado</p>
+              <p className="text-gray-500">No se encontraron empleados</p>
+              <p className="text-gray-400 text-sm mt-2">Comienza agregando el primer empleado</p>
             </div>
           )}
         </div>
@@ -231,98 +227,98 @@ const Empleados = () => {
 
       {/* Modal para crear/editar */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="glass-card rounded-3xl p-8 max-w-md w-full border border-white/20 shadow-glow">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="corporate-card p-8 max-w-md w-full">
             <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-white">
+              <h3 className="text-xl font-semibold text-gray-900">
                 {editingEmpleado ? 'Editar Empleado' : 'Nuevo Empleado'}
               </h3>
-              <p className="text-blue-100 mt-2">
+              <p className="text-gray-600 mt-2">
                 {editingEmpleado ? 'Actualiza la información del empleado' : 'Completa la información del nuevo empleado'}
               </p>
             </div>
               
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">Cédula *</label>
+                <label className="block text-gray-700 text-sm font-medium mb-2">Cédula *</label>
                 <input
                   type="text"
                   required
                   value={formData.cedula}
                   onChange={(e) => setFormData({...formData, cedula: e.target.value})}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="corporate-input w-full"
                   placeholder="Ej: V-12345678"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-white/80 text-sm font-medium mb-2">Nombre *</label>
+                  <label className="block text-gray-700 text-sm font-medium mb-2">Nombre *</label>
                   <input
                     type="text"
                     required
                     value={formData.nombre}
                     onChange={(e) => setFormData({...formData, nombre: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="corporate-input w-full"
                     placeholder="Nombre"
                   />
                 </div>
                 <div>
-                  <label className="block text-white/80 text-sm font-medium mb-2">Apellido *</label>
+                  <label className="block text-gray-700 text-sm font-medium mb-2">Apellido *</label>
                   <input
                     type="text"
                     required
                     value={formData.apellido}
                     onChange={(e) => setFormData({...formData, apellido: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="corporate-input w-full"
                     placeholder="Apellido"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">Cargo *</label>
+                <label className="block text-gray-700 text-sm font-medium mb-2">Cargo *</label>
                 <input
                   type="text"
                   required
                   value={formData.cargo}
                   onChange={(e) => setFormData({...formData, cargo: e.target.value})}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="corporate-input w-full"
                   placeholder="Cargo del empleado"
                 />
               </div>
 
               <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">Departamento</label>
+                <label className="block text-gray-700 text-sm font-medium mb-2">Departamento</label>
                 <input
                   type="text"
                   value={formData.departamento}
                   onChange={(e) => setFormData({...formData, departamento: e.target.value})}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="corporate-input w-full"
                   placeholder="Departamento"
                 />
               </div>
 
               <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">Correo *</label>
+                <label className="block text-gray-700 text-sm font-medium mb-2">Correo *</label>
                 <input
                   type="email"
                   required
                   value={formData.correo}
                   onChange={(e) => setFormData({...formData, correo: e.target.value})}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="corporate-input w-full"
                   placeholder="correo@ejemplo.com"
                 />
               </div>
 
               <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">Fecha Ingreso *</label>
+                <label className="block text-gray-700 text-sm font-medium mb-2">Fecha Ingreso *</label>
                 <input
                   type="date"
                   required
                   value={formData.fecha_ingreso}
                   onChange={(e) => setFormData({...formData, fecha_ingreso: e.target.value})}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="corporate-input w-full"
                 />
               </div>
 
@@ -330,13 +326,13 @@ const Empleados = () => {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-6 py-3 text-white/80 hover:text-white transition-colors font-medium"
+                  className="corporate-btn-secondary"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-semibold shadow-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300"
+                  className="corporate-btn-primary"
                 >
                   {editingEmpleado ? 'Actualizar' : 'Crear'}
                 </button>

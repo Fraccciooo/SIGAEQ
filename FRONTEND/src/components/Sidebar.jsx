@@ -8,33 +8,29 @@ const Sidebar = () => {
     { 
       name: 'Dashboard', 
       href: '/', 
-      icon: '📊',
-      gradient: 'from-blue-500 to-cyan-500'
+      icon: '📊'
     },
     { 
       name: 'Empleados', 
       href: '/empleados', 
-      icon: '👥',
-      gradient: 'from-green-500 to-teal-500'
+      icon: '👥'
     },
     { 
       name: 'Equipos', 
       href: '/equipos', 
-      icon: '💻',
-      gradient: 'from-purple-500 to-pink-500'
+      icon: '💻'
     },
     { 
       name: 'Asignaciones', 
       href: '/asignaciones', 
-      icon: '🔄',
-      gradient: 'from-orange-500 to-red-500'
+      icon: '🔄'
     },
   ]
 
   return (
-    <div className="w-80 glass-nav h-[calc(100vh-4rem)]">
+    <div className="w-64 corporate-sidebar min-h-screen bg-white border-r border-gray-200">
       <nav className="p-6">
-        <div className="space-y-3">
+        <div className="space-y-1">
           {navigation.map((item) => {
             const isActive = location.pathname === item.href
             
@@ -42,33 +38,28 @@ const Sidebar = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`group flex items-center p-4 text-sm font-semibold rounded-2xl transition-all duration-300 hover-lift ${
+                className={`flex items-center p-3 text-sm font-medium rounded-lg transition-colors ${
                   isActive
-                    ? `bg-gradient-to-r ${item.gradient} text-white shadow-lg`
-                    : 'text-white/80 hover:text-white hover:bg-white/10'
+                    ? 'bg-blue-50 text-blue-700 border border-blue-200'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                 }`}
               >
-                <span className={`text-xl mr-4 transition-transform duration-300 group-hover:scale-110 ${
-                  isActive ? 'text-white' : 'text-white/70'
-                }`}>
+                <span className="text-lg mr-3">
                   {item.icon}
                 </span>
                 {item.name}
-                
-                {/* Indicador activo */}
-                {isActive && (
-                  <div className="ml-auto w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                )}
               </Link>
             )
           })}
         </div>
 
-        {/* Sección de información */}
-        <div className="mt-8 p-4 bg-white/10 rounded-2xl border border-white/20">
-          <h3 className="text-white font-semibold text-sm mb-2">Sistema SIGAEQ</h3>
-          <p className="text-white/60 text-xs">
-            Gestión integral de equipos y empleados de la Fundación Compañía Nacional de Música
+        {/* Información del sistema */}
+        <div className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+          <h3 className="text-sm font-semibold text-blue-900 mb-2">
+            Sistema SIGAEQ
+          </h3>
+          <p className="text-blue-700 text-xs leading-relaxed">
+            Gestión integral de equipos y empleados
           </p>
         </div>
       </nav>

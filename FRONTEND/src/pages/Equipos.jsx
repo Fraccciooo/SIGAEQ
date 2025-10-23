@@ -145,55 +145,55 @@ const Equipos = () => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Encabezado */}
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-white mb-3">
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">
           Gestión de Equipos
         </h1>
-        <p className="text-blue-100 text-lg opacity-80">
+        <p className="text-gray-600">
           Administra el inventario de equipos tecnológicos
         </p>
       </div>
 
       {error && (
-        <div className="glass-card p-4 border border-red-400/30 bg-red-500/20 rounded-2xl">
-          <p className="text-red-100 text-center">{error}</p>
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded text-sm">
+          {error}
         </div>
       )}
 
       {/* Estadísticas */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
-        <div className="glass-card p-4 rounded-2xl border border-white/20 text-center">
-          <h3 className="text-sm font-medium text-blue-100">Total</h3>
-          <p className="text-2xl font-semibold text-white">{estadisticas.total}</p>
+        <div className="corporate-card p-4 text-center">
+          <h3 className="text-sm font-medium text-gray-600">Total</h3>
+          <p className="text-2xl font-semibold text-gray-900">{estadisticas.total}</p>
         </div>
-        <div className="glass-card p-4 rounded-2xl border border-green-400/30 bg-green-500/20 text-center">
-          <h3 className="text-sm font-medium text-blue-100">Disponibles</h3>
-          <p className="text-2xl font-semibold text-green-300">{estadisticas.disponibles}</p>
+        <div className="corporate-card p-4 text-center border border-green-200 bg-green-50">
+          <h3 className="text-sm font-medium text-gray-600">Disponibles</h3>
+          <p className="text-2xl font-semibold text-green-600">{estadisticas.disponibles}</p>
         </div>
-        <div className="glass-card p-4 rounded-2xl border border-blue-400/30 bg-blue-500/20 text-center">
-          <h3 className="text-sm font-medium text-blue-100">Asignados</h3>
-          <p className="text-2xl font-semibold text-blue-300">{estadisticas.asignados}</p>
+        <div className="corporate-card p-4 text-center border border-blue-200 bg-blue-50">
+          <h3 className="text-sm font-medium text-gray-600">Asignados</h3>
+          <p className="text-2xl font-semibold text-blue-600">{estadisticas.asignados}</p>
         </div>
-        <div className="glass-card p-4 rounded-2xl border border-yellow-400/30 bg-yellow-500/20 text-center">
-          <h3 className="text-sm font-medium text-blue-100">Mantenimiento</h3>
-          <p className="text-2xl font-semibold text-yellow-300">{estadisticas.mantenimiento}</p>
+        <div className="corporate-card p-4 text-center border border-yellow-200 bg-yellow-50">
+          <h3 className="text-sm font-medium text-gray-600">Mantenimiento</h3>
+          <p className="text-2xl font-semibold text-yellow-600">{estadisticas.mantenimiento}</p>
         </div>
-        <div className="glass-card p-4 rounded-2xl border border-red-400/30 bg-red-500/20 text-center">
-          <h3 className="text-sm font-medium text-blue-100">Baja</h3>
-          <p className="text-2xl font-semibold text-red-300">{estadisticas.baja}</p>
+        <div className="corporate-card p-4 text-center border border-red-200 bg-red-50">
+          <h3 className="text-sm font-medium text-gray-600">Baja</h3>
+          <p className="text-2xl font-semibold text-red-600">{estadisticas.baja}</p>
         </div>
       </div>
 
       {/* Tarjeta principal */}
-      <div className="glass-card p-6 rounded-2xl border border-white/20">
+      <div className="corporate-card p-6">
         <div className="flex flex-col lg:flex-row justify-between items-center mb-6">
-          <div className="text-center lg:text-left mb-4 lg:mb-0">
-            <h2 className="text-2xl font-bold text-white mb-2">
+          <div className="mb-4 lg:mb-0">
+            <h2 className="text-xl font-semibold text-gray-900 mb-2">
               Inventario de Equipos
             </h2>
-            <p className="text-blue-100">
+            <p className="text-gray-600">
               {equiposFiltrados.length} de {equipos.length} equipos mostrados
             </p>
           </div>
@@ -202,18 +202,18 @@ const Equipos = () => {
             <select 
               value={filtroEstado}
               onChange={(e) => setFiltroEstado(e.target.value)}
-              className="px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="corporate-input"
             >
-              <option value="todos" className="bg-gray-800">Todos los estados</option>
-              <option value="Disponible" className="bg-gray-800">Disponible</option>
-              <option value="Asignado" className="bg-gray-800">Asignado</option>
-              <option value="Mantenimiento" className="bg-gray-800">Mantenimiento</option>
-              <option value="Baja" className="bg-gray-800">Baja</option>
+              <option value="todos">Todos los estados</option>
+              <option value="Disponible">Disponible</option>
+              <option value="Asignado">Asignado</option>
+              <option value="Mantenimiento">Mantenimiento</option>
+              <option value="Baja">Baja</option>
             </select>
             
             <button
               onClick={openCreateModal}
-              className="bg-gradient-to-r from-green-500 to-teal-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:from-green-600 hover:to-teal-600 transition-all duration-300 hover-lift flex items-center"
+              className="corporate-btn-primary flex items-center"
             >
               <span className="text-lg mr-2">+</span>
               Nuevo Equipo
@@ -223,24 +223,24 @@ const Equipos = () => {
 
         {/* Lista de equipos */}
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="corporate-table">
             <thead>
-              <tr className="border-b border-white/20">
-                <th className="text-left py-4 px-4 text-white/60 font-semibold">Equipo</th>
-                <th className="text-left py-4 px-4 text-white/60 font-semibold">Serial</th>
-                <th className="text-left py-4 px-4 text-white/60 font-semibold">Estado</th>
-                <th className="text-left py-4 px-4 text-white/60 font-semibold">Asignado a</th>
-                <th className="text-left py-4 px-4 text-white/60 font-semibold">Ubicación</th>
-                <th className="text-left py-4 px-4 text-white/60 font-semibold">Acciones</th>
+              <tr>
+                <th>Equipo</th>
+                <th>Serial</th>
+                <th>Estado</th>
+                <th>Asignado a</th>
+                <th>Ubicación</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               {equiposFiltrados.map((equipo) => (
-                <tr key={equipo.id} className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                  <td className="py-4 px-4">
+                <tr key={equipo.id}>
+                  <td>
                     <div className="flex items-center">
-                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mr-4">
-                        <span className="text-white text-xl">
+                      <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                        <span className="text-blue-600 text-lg">
                           {equipo.tipo === 'Laptop' ? '💻' : 
                            equipo.tipo === 'Tablet' ? '📱' :
                            equipo.tipo === 'Monitor' ? '🖥️' :
@@ -248,52 +248,52 @@ const Equipos = () => {
                         </span>
                       </div>
                       <div>
-                        <div className="text-white font-semibold">
+                        <div className="font-medium text-gray-900">
                           {equipo.tipo}
                         </div>
-                        <div className="text-white/60 text-sm">
+                        <div className="text-gray-500 text-sm">
                           {equipo.marca} {equipo.modelo}
                         </div>
                       </div>
                     </div>
                   </td>
-                  <td className="py-4 px-4">
-                    <div className="text-white/70 font-mono text-sm">
+                  <td>
+                    <div className="text-gray-500 text-sm font-mono">
                       {equipo.numero_serial}
                     </div>
                   </td>
-                  <td className="py-4 px-4">
-                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border ${
-                      equipo.estado === 'Disponible' ? 'bg-green-500/20 text-green-300 border-green-500/30' :
-                      equipo.estado === 'Asignado' ? 'bg-blue-500/20 text-blue-300 border-blue-500/30' :
-                      equipo.estado === 'Mantenimiento' ? 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30' :
-                      'bg-red-500/20 text-red-300 border-red-500/30'
-                    }`}>
+                  <td>
+                    <span className={
+                      equipo.estado === 'Disponible' ? 'badge-success' :
+                      equipo.estado === 'Asignado' ? 'badge-info' :
+                      equipo.estado === 'Mantenimiento' ? 'badge-warning' :
+                      'badge-error'
+                    }>
                       {equipo.estado}
                     </span>
                   </td>
-                  <td className="py-4 px-4">
-                    <div className="text-white font-medium">
+                  <td>
+                    <div className="font-medium text-gray-900">
                       {equipo.empleado_nombre || 'No asignado'}
                     </div>
                   </td>
-                  <td className="py-4 px-4">
-                    <div className="text-white/70 text-sm">
+                  <td>
+                    <div className="text-gray-500 text-sm">
                       {equipo.ubicacion}
                     </div>
                   </td>
-                  <td className="py-4 px-4">
+                  <td>
                     <div className="flex flex-wrap gap-2">
                       <button
                         onClick={() => handleEdit(equipo)}
-                        className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-lg border border-blue-500/30 hover:bg-blue-500/30 transition-colors text-sm"
+                        className="text-blue-600 hover:text-blue-800 text-sm font-medium"
                       >
                         Editar
                       </button>
                       {equipo.estado === 'Disponible' && (
                         <button
                           onClick={() => handleAsignar(equipo.id)}
-                          className="px-3 py-1 bg-green-500/20 text-green-300 rounded-lg border border-green-500/30 hover:bg-green-500/30 transition-colors text-sm"
+                          className="text-green-600 hover:text-green-800 text-sm font-medium"
                         >
                           Asignar
                         </button>
@@ -301,14 +301,14 @@ const Equipos = () => {
                       {equipo.estado === 'Asignado' && (
                         <button
                           onClick={() => handleLiberar(equipo.id)}
-                          className="px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-lg border border-yellow-500/30 hover:bg-yellow-500/30 transition-colors text-sm"
+                          className="text-yellow-600 hover:text-yellow-800 text-sm font-medium"
                         >
                           Liberar
                         </button>
                       )}
                       <button
                         onClick={() => handleDelete(equipo.id)}
-                        className="px-3 py-1 bg-red-500/20 text-red-300 rounded-lg border border-red-500/30 hover:bg-red-500/30 transition-colors text-sm"
+                        className="text-red-600 hover:text-red-800 text-sm font-medium"
                       >
                         Eliminar
                       </button>
@@ -321,11 +321,11 @@ const Equipos = () => {
 
           {equiposFiltrados.length === 0 && !loading && (
             <div className="text-center py-12">
-              <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <span className="text-white/40 text-2xl">💻</span>
+              <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <span className="text-gray-400 text-2xl">💻</span>
               </div>
-              <p className="text-white/60 text-lg">No se encontraron equipos</p>
-              <p className="text-white/40 text-sm mt-2">
+              <p className="text-gray-500">No se encontraron equipos</p>
+              <p className="text-gray-400 text-sm mt-2">
                 {filtroEstado !== 'todos' ? 'Prueba con otro filtro' : 'Comienza agregando el primer equipo'}
               </p>
             </div>
@@ -335,109 +335,109 @@ const Equipos = () => {
 
       {/* Modal para crear/editar */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="glass-card rounded-3xl p-8 max-w-md w-full border border-white/20 shadow-glow">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="corporate-card p-8 max-w-md w-full">
             <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-white">
+              <h3 className="text-xl font-semibold text-gray-900">
                 {editingEquipo ? 'Editar Equipo' : 'Nuevo Equipo'}
               </h3>
-              <p className="text-blue-100 mt-2">
+              <p className="text-gray-600 mt-2">
                 {editingEquipo ? 'Actualiza la información del equipo' : 'Completa la información del nuevo equipo'}
               </p>
             </div>
               
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">Tipo *</label>
+                <label className="block text-gray-700 text-sm font-medium mb-2">Tipo *</label>
                 <select
                   required
                   value={formData.tipo}
                   onChange={(e) => setFormData({...formData, tipo: e.target.value})}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="corporate-input w-full"
                 >
-                  <option value="" className="bg-gray-800">Seleccionar tipo</option>
-                  <option value="Laptop" className="bg-gray-800">Laptop</option>
-                  <option value="Tablet" className="bg-gray-800">Tablet</option>
-                  <option value="Monitor" className="bg-gray-800">Monitor</option>
-                  <option value="Impresora" className="bg-gray-800">Impresora</option>
-                  <option value="Teclado" className="bg-gray-800">Teclado</option>
-                  <option value="Mouse" className="bg-gray-800">Mouse</option>
-                  <option value="Proyector" className="bg-gray-800">Proyector</option>
-                  <option value="Servidor" className="bg-gray-800">Servidor</option>
+                  <option value="">Seleccionar tipo</option>
+                  <option value="Laptop">Laptop</option>
+                  <option value="Tablet">Tablet</option>
+                  <option value="Monitor">Monitor</option>
+                  <option value="Impresora">Impresora</option>
+                  <option value="Teclado">Teclado</option>
+                  <option value="Mouse">Mouse</option>
+                  <option value="Proyector">Proyector</option>
+                  <option value="Servidor">Servidor</option>
                 </select>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-white/80 text-sm font-medium mb-2">Marca</label>
+                  <label className="block text-gray-700 text-sm font-medium mb-2">Marca</label>
                   <input
                     type="text"
                     value={formData.marca}
                     onChange={(e) => setFormData({...formData, marca: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="corporate-input w-full"
                     placeholder="Marca"
                   />
                 </div>
                 <div>
-                  <label className="block text-white/80 text-sm font-medium mb-2">Modelo</label>
+                  <label className="block text-gray-700 text-sm font-medium mb-2">Modelo</label>
                   <input
                     type="text"
                     value={formData.modelo}
                     onChange={(e) => setFormData({...formData, modelo: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="corporate-input w-full"
                     placeholder="Modelo"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">Número de Serial *</label>
+                <label className="block text-gray-700 text-sm font-medium mb-2">Número de Serial *</label>
                 <input
                   type="text"
                   required
                   value={formData.numero_serial}
                   onChange={(e) => setFormData({...formData, numero_serial: e.target.value})}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="corporate-input w-full"
                   placeholder="Número de serial"
                 />
               </div>
 
               <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">Estado</label>
+                <label className="block text-gray-700 text-sm font-medium mb-2">Estado</label>
                 <select
                   value={formData.estado}
                   onChange={(e) => setFormData({...formData, estado: e.target.value})}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="corporate-input w-full"
                 >
-                  <option value="Disponible" className="bg-gray-800">Disponible</option>
-                  <option value="Asignado" className="bg-gray-800">Asignado</option>
-                  <option value="Mantenimiento" className="bg-gray-800">Mantenimiento</option>
-                  <option value="Baja" className="bg-gray-800">Baja</option>
+                  <option value="Disponible">Disponible</option>
+                  <option value="Asignado">Asignado</option>
+                  <option value="Mantenimiento">Mantenimiento</option>
+                  <option value="Baja">Baja</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">Ubicación</label>
+                <label className="block text-gray-700 text-sm font-medium mb-2">Ubicación</label>
                 <input
                   type="text"
                   value={formData.ubicacion}
                   onChange={(e) => setFormData({...formData, ubicacion: e.target.value})}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="corporate-input w-full"
                   placeholder="Ubicación del equipo"
                 />
               </div>
 
               {formData.estado === 'Asignado' && (
                 <div>
-                  <label className="block text-white/80 text-sm font-medium mb-2">Asignar a empleado</label>
+                  <label className="block text-gray-700 text-sm font-medium mb-2">Asignar a empleado</label>
                   <select
                     value={formData.empleado_id}
                     onChange={(e) => setFormData({...formData, empleado_id: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="corporate-input w-full"
                   >
-                    <option value="" className="bg-gray-800">Seleccionar empleado</option>
+                    <option value="">Seleccionar empleado</option>
                     {empleados.map(emp => (
-                      <option key={emp.id} value={emp.id} className="bg-gray-800">
+                      <option key={emp.id} value={emp.id}>
                         {emp.nombre} {emp.apellido} - {emp.departamento}
                       </option>
                     ))}
@@ -449,13 +449,13 @@ const Equipos = () => {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-6 py-3 text-white/80 hover:text-white transition-colors font-medium"
+                  className="corporate-btn-secondary"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-semibold shadow-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300"
+                  className="corporate-btn-primary"
                 >
                   {editingEquipo ? 'Actualizar' : 'Crear'}
                 </button>

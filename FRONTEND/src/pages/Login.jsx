@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
@@ -6,14 +6,15 @@ const Login = () => {
   const [credentials, setCredentials] = useState({ username: '', password: '' })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  
+  const [showPassword, setShowPassword] = useState(false)
+
   const { login, isAuthenticated } = useAuth()
   const navigate = useNavigate()
+  const usernameRef = useRef(null)
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/')
-    }
+    if (isAuthenticated) navigate('/')
+    usernameRef.current?.focus()
   }, [isAuthenticated, navigate])
 
   const handleSubmit = async (e) => {
@@ -22,13 +23,12 @@ const Login = () => {
     setError('')
 
     const result = await login(credentials)
-    
     if (result.success) {
       navigate('/')
     } else {
-      setError(result.error)
+      setError(result.error || 'Credenciales inválidas')
     }
-    
+
     setLoading(false)
   }
 
@@ -40,69 +40,77 @@ const Login = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen flex items-center justify-center corporate-bg p-4">
       <div className="max-w-md w-full">
         {/* Tarjeta de login */}
-        <div className="glass-card shadow-glow rounded-3xl p-8">
-          {/* Logo y título */}
+        <div className="corporate-card p-8 shadow-lg">
+          {/* Logo y encabezado */}
           <div className="text-center mb-8">
-            <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-              <span className="text-white font-bold text-2xl">S</span>
-            </div>
-            <h2 className="text-3xl font-bold text-white mb-2">
-              Bienvenido a SIGAEQ
-            </h2>
-            <p className="text-blue-100 opacity-80">
+            <h1 className="text-2xl font-bold text-gray-800 mb-2">
+              SIGAEQ
+            </h1>
+            <p className="text-gray-600 text-sm">
               Sistema Integral de Gestión y Asignación de Equipos
             </p>
           </div>
-          
-          <form className="space-y-6" onSubmit={handleSubmit}>
+
+          {/* Formulario */}
+          <form onSubmit={handleSubmit} className="space-y-6">
             {error && (
-              <div className="bg-red-500/20 border border-red-400/30 text-red-100 px-4 py-3 rounded-xl text-sm">
-                {error}
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded text-sm">
+                <div className="flex items-center">
+                  <span className="mr-2">⚠️</span>
+                  {error}
+                </div>
               </div>
             )}
-            
-            {/* Campos de formulario */}
-            <div className="space-y-4">
-              <div>
-                <label htmlFor="username" className="block text-sm font-medium text-white mb-2">
-                  Usuario
-                </label>
-                <input
-                  id="username"
-                  name="username"
-                  type="text"
-                  required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                  placeholder="Ingresa tu usuario"
-                  value={credentials.username}
-                  onChange={handleChange}
-                />
-              </div>
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-white mb-2">
-                  Contraseña
-                </label>
+
+            <div className="space-y-2">
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+                Usuario
+              </label>
+              <input
+                id="username"
+                name="username"
+                type="text"
+                ref={usernameRef}
+                required
+                value={credentials.username}
+                onChange={handleChange}
+                className="corporate-input w-full"
+                placeholder="Ingresa tu usuario"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                Contraseña
+              </label>
+              <div className="relative">
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                  placeholder="Ingresa tu contraseña"
                   value={credentials.password}
                   onChange={handleChange}
+                  className="corporate-input w-full pr-12"
+                  placeholder="Ingresa tu contraseña"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 text-sm"
+                >
+                  {showPassword ? 'Ocultar' : 'Mostrar'}
+                </button>
               </div>
             </div>
 
-            {/* Botón de login */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-4 rounded-xl font-semibold shadow-lg hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover-lift"
+              className="corporate-btn-primary w-full py-3 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <div className="flex items-center justify-center">
@@ -114,23 +122,10 @@ const Login = () => {
               )}
             </button>
           </form>
-
-          {/* Credenciales de prueba */}
-          <div className="mt-6 p-4 bg-white/10 rounded-xl border border-white/20">
-            <h4 className="text-white font-semibold text-sm mb-2 text-center">Credenciales de Prueba</h4>
-            <div className="text-center space-y-1">
-              <p className="text-blue-100 text-sm">
-                <span className="font-semibold">Usuario:</span> aprimera
-              </p>
-              <p className="text-blue-100 text-sm">
-                <span className="font-semibold">Contraseña:</span> admin123
-              </p>
-            </div>
-          </div>
-
+          
           {/* Footer */}
           <div className="mt-6 text-center">
-            <p className="text-white/40 text-xs">
+            <p className="text-gray-500 text-xs">
               Fundación Compañía Nacional de Música
             </p>
           </div>
