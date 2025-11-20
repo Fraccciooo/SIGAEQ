@@ -59,6 +59,24 @@ class Asignacion {
         `;
         db.all(sql, [empleadoId, empleadoId], callback);
     }
+    
+    // OBTENER ASIGNACIÓN POR ID (NUEVA FUNCIÓN)
+    static getById(id, callback) {
+        const sql = `SELECT id, equipo_id, empleado_id_nuevo FROM historial_asignaciones WHERE id = ?`;
+        db.get(sql, [id], callback);
+    }
+    
+    // OBTENER LA ÚLTIMA ASIGNACIÓN DE UN EQUIPO (NUEVA FUNCIÓN)
+    static getLatestByEquipo(equipoId, callback) {
+        const sql = `
+            SELECT id, equipo_id, empleado_id_nuevo
+            FROM historial_asignaciones
+            WHERE equipo_id = ?
+            ORDER BY fecha_cambio DESC
+            LIMIT 1
+        `;
+        db.get(sql, [equipoId], callback);
+    }
 
     // Registrar nueva asignación
     static crearAsignacion(asignacionData, callback) {
@@ -78,6 +96,19 @@ class Asignacion {
 
         db.run(sql, params, function(err) {
             callback(err, { id: this.lastID });
+        });
+    }
+
+    // Eliminar asignación por ID
+    static delete(id, callback) {
+        const sql = `DELETE FROM historial_asignaciones WHERE id = ?`;
+        db.run(sql, [id], function(err) {
+            if (err) {
+                console.error('Error en delete Asignacion:', err);
+                callback(err);
+            } else {
+                callback(null, this.changes);
+            }
         });
     }
 

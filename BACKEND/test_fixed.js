@@ -5,8 +5,8 @@ const BASE_URL = 'http://localhost:3000';
 // Credenciales corregidas basadas en lo que encontremos
 const testCredentials = [
     { username: 'aprimera', password: 'admin123', description: 'Admin Principal' },
-    { username: 'zaponte', password: 'rh123', description: 'Recursos Humanos' },
-    { username: 'ogonzalez', password: 'tech123', description: 'Tecnología' }
+    { username: 'ybompart', password: 'rh123', description: 'Recursos Humanos' },
+    { username: 'walwin30', password: 'tecno1+', description: 'Tecnología' }
 ];
 
 function makeRequest(method, path, data = null, token = null) {

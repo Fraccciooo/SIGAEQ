@@ -122,7 +122,7 @@ const Empleados = () => {
       )}
 
       {/* Tarjeta de acciones y estadísticas */}
-      <div className="corporate-card p-6">
+      <div className="corporate-panel p-6">
         <div className="flex flex-col lg:flex-row justify-between items-center mb-6">
           <div className="mb-4 lg:mb-0">
             <h2 className="text-xl font-semibold text-gray-900 mb-2">
@@ -134,7 +134,7 @@ const Empleados = () => {
           </div>
           <button
             onClick={openCreateModal}
-            className="corporate-btn-primary flex items-center"
+            className="corporate-btn-setup flex items-center"
           >
             <span className="text-lg mr-2">+</span>
             Nuevo Empleado
@@ -165,7 +165,7 @@ const Empleados = () => {
                         </span>
                       </div>
                       <div>
-                        <div className="font-medium text-gray-900">
+                        <div className="font-center text-gray-900">
                           {empleado.nombre} {empleado.apellido}
                         </div>
                         <div className="text-gray-500 text-sm">
@@ -228,7 +228,7 @@ const Empleados = () => {
       {/* Modal para crear/editar */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="corporate-card p-8 max-w-md w-full">
+          <div className="corporate-panel p-8 max-w-md w-full">
             <div className="text-center mb-6">
               <h3 className="text-xl font-semibold text-gray-900">
                 {editingEmpleado ? 'Editar Empleado' : 'Nuevo Empleado'}
@@ -290,13 +290,21 @@ const Empleados = () => {
 
               <div>
                 <label className="block text-gray-700 text-sm font-medium mb-2">Departamento</label>
-                <input
-                  type="text"
+              <select
+                  required
                   value={formData.departamento}
                   onChange={(e) => setFormData({...formData, departamento: e.target.value})}
                   className="corporate-input w-full"
-                  placeholder="Departamento"
-                />
+                >
+                  <option value="">Seleccionar Departamento</option>
+                  <option value="Contabilidad">Contabilidad</option>
+                  <option value="Estrategias">Estrategias</option>
+                  <option value="Mantenimiento">Mantenimiento</option>
+                  <option value="Planificación">Planificación</option>
+                  <option value="Presidencia">Presidencia</option>
+                  <option value="Recursos Humanos">Recursos Humanos</option>
+                  <option value="Tecnologia">Tecnologia</option>
+              </select>
               </div>
 
               <div>
@@ -332,7 +340,7 @@ const Empleados = () => {
                 </button>
                 <button
                   type="submit"
-                  className="corporate-btn-primary"
+                  className="corporate-btn-setup"
                 >
                   {editingEmpleado ? 'Actualizar' : 'Crear'}
                 </button>

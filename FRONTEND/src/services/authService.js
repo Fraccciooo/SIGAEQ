@@ -115,5 +115,15 @@ export const asignacionesService = {
   create: async (asignacionData) => {
     const response = await api.post('/asignaciones', asignacionData)
     return response.data
+  },
+
+  createMasiva: async (datosMasivos) => {
+    const response = await api.post('/asignaciones/masiva', datosMasivos)
+    return response.data
+  },
+
+  delete: async (id) => {
+    const response = await api.delete(`/asignaciones/${id}`)
+    return response.data
   }
 }

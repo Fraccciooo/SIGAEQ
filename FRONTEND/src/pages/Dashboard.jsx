@@ -64,7 +64,7 @@ const Dashboard = () => {
   }
 
   const StatCard = ({ title, value, icon, description }) => (
-    <div className="corporate-card p-6">
+    <div className="corporate-panel-data-dashboard p-6">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-gray-600 text-sm font-medium mb-1">{title}</p>
@@ -128,7 +128,7 @@ const Dashboard = () => {
 
       {/* Segunda fila de estadísticas */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="corporate-card p-6">
+        <div className="corporate-panel p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
             Estado de Equipos
           </h3>
@@ -149,7 +149,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="corporate-card p-6">
+        <div className="corporate-panel p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
             Equipos por Tipo
           </h3>
@@ -165,7 +165,7 @@ const Dashboard = () => {
       </div>
 
       {/* Últimas asignaciones */}
-      <div className="corporate-card p-6">
+      <div className="corporate-panel p-6">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-semibold text-gray-900">
             Últimas Asignaciones

@@ -5,7 +5,9 @@ const {
     getAsignacionesByEquipo,
     getAsignacionesByEmpleado,
     createAsignacion,
-    getEstadisticas
+    createAsignacionMasiva,
+    getEstadisticas,
+    deleteAsignacion
 } = require('../controllers/asignacionesController');
 
 // GET /api/asignaciones - Obtener todo el historial
@@ -20,7 +22,13 @@ router.get('/equipo/:equipoId', getAsignacionesByEquipo);
 // GET /api/asignaciones/empleado/:empleadoId - Obtener historial por empleado
 router.get('/empleado/:empleadoId', getAsignacionesByEmpleado);
 
+// POST /api/asignaciones/masiva - Registrar asignaciones múltiples (NUEVA RUTA)
+router.post('/masiva', createAsignacionMasiva);
+
 // POST /api/asignaciones - Registrar nueva asignación
 router.post('/', createAsignacion);
+
+// DELETE /api/asignaciones/:id - Eliminar una asignación (NUEVA RUTA)
+router.delete('/:id', deleteAsignacion);
 
 module.exports = router;

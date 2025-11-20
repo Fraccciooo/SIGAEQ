@@ -24,8 +24,8 @@ console.log('🔄 ACTUALIZANDO CONTRASEÑAS...');
 
 const users = [
     { username: 'aprimera', password: 'admin123' },
-    { username: 'ybompai', password: 'rh123' },
-    { username: 'walwin', password: 'tech123' }
+    { username: 'ybompart', password: 'rh123' },
+    { username: 'walvwin30', password: 'tecno+1' }
 ];
 
 users.forEach(user => {
@@ -36,8 +36,8 @@ users.forEach(user => {
 setTimeout(() => {
     console.log('\n🎯 CONTRASEÑAS ACTUALIZADAS:');
     console.log('   👤 aprimera / admin123');
-    console.log('   👤 ybompai / rh123'); 
-    console.log('   👤 walwin / tech123');
+    console.log('   👤 ybompart / rh123'); 
+    console.log('   👤 walwin30 / tecno+1');
     console.log('\n💡 Ahora puedes usar estas credenciales para login');
     db.close();
 }, 1000);

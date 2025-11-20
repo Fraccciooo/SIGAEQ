@@ -39,8 +39,8 @@ class Equipo {
     static create(equipoData, callback) {
         const sql = `
             INSERT INTO equipos 
-            (tipo, marca, modelo, numero_serial, estado, ubicacion, empleado_id) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            (tipo, marca, modelo, numero_serial, estado, ubicacion) 
+            VALUES (?, ?, ?, ?, ?, ?)
         `;
         
         const params = [
@@ -49,8 +49,7 @@ class Equipo {
             equipoData.modelo,
             equipoData.numero_serial,
             equipoData.estado || 'Disponible',
-            equipoData.ubicacion,
-            equipoData.empleado_id || null
+            equipoData.ubicacion || 'Almacen General' // Usar 'Almacen General' como default
         ];
 
         db.run(sql, params, function(err) {
@@ -74,8 +73,9 @@ class Equipo {
             equipoData.modelo,
             equipoData.numero_serial,
             equipoData.estado,
-            equipoData.ubicacion,
-            equipoData.empleado_id,
+            // Asignar 'Almacen General' si se libera manualmente
+            equipoData.ubicacion || (equipoData.empleado_id ? null : 'Almacen General'),
+            equipoData.empleado_id || null, 
             id
         ];
 
@@ -88,22 +88,26 @@ class Equipo {
         db.run(sql, [id], callback);
     }
 
-    // Asignar equipo a empleado
+    // ASIGNAR EQUIPO A EMPLEADO (MODIFICADO: Obtiene la ubicación del departamento del empleado)
     static asignar(equipoId, empleadoId, callback) {
         const sql = `
             UPDATE equipos SET 
-            empleado_id = ?, estado = 'Asignado',
+            empleado_id = ?,
+            estado = 'Asignado',
+            ubicacion = (SELECT departamento FROM empleados WHERE id = ?), 
             fecha_actualizacion = CURRENT_TIMESTAMP
             WHERE id = ?
         `;
-        db.run(sql, [empleadoId, equipoId], callback);
+        db.run(sql, [empleadoId, empleadoId, equipoId], callback);
     }
 
-    // Liberar equipo (quitar asignación)
+    // LIBERAR EQUIPO (MODIFICADO: Establece la ubicación a 'Almacen General')
     static liberar(equipoId, callback) {
         const sql = `
             UPDATE equipos SET 
-            empleado_id = NULL, estado = 'Disponible',
+            empleado_id = NULL,
+            estado = 'Disponible',
+            ubicacion = 'Almacen General', // 'Almacen General' por solicitud
             fecha_actualizacion = CURRENT_TIMESTAMP
             WHERE id = ?
         `;

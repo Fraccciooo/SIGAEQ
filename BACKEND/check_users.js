@@ -33,7 +33,7 @@ db.all(sql, [], async (err, rows) => {
         console.log(`   🔐 Password Hash: ${user.password_hash}`);
         
         // Probar contraseñas comunes
-        const commonPasswords = ['admin123', 'rh123', 'tech123', 'password', '123456'];
+        const commonPasswords = ['admin123', 'rh123', 'tecno1+', 'password', '123456'];
         let found = false;
         
         for (const password of commonPasswords) {
