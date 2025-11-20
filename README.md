@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # SIGAEQ - Sistema Integrado de Gestion y Asignacion de Equipos 
  
 ## Proyecto de Servicio Comunitario 
@@ -9,4 +8,3 @@
 **Fundacion:** Companiaa Nacional de Musica 
 =======
 # SIGAEQ
->>>>>>> 331c6b8c5668e6f7c891c5798d4d193b50363c5b
